@@ -47,14 +47,14 @@ def generate_launch_description():
         executable="robot_state_publisher",
         output='screen',
         parameters=[{'robot_description': robotDescription, 'use_sim_time': True}]
-    )   
+    )
+      
 
     # Here we create an empty launch description object
     launchDescriptionObject = LaunchDescription()
 
     # We add gazeboLaunch
-    launchDescriptionObject.add_action(gazeboLaunch)
-
+    launchDescriptionObject.add_action(gazeboLaunch) 
     # We add two nodes
     launchDescriptionObject.add_action(spawnModelNode)
     launchDescriptionObject.add_action(nodeRobotStatePublisher)

@@ -35,6 +35,21 @@
     </inertial>
   </xacro:macro>
 
+  <xacro:macro name="inertial_cylinder" params="mass length radius">
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${mass}"/>
+        <inertia 
+            ixx="${0.5 * mass * radius * radius}" 
+            ixy="0.0" 
+            ixz="0.0"
+            iyy="${0.5 * mass * radius * radius}" 
+            iyz="0.0" 
+            izz="${(1.0/12.0) * mass * (3 * radius * radius + length * length)}"/>
+    </inertial>
+ </xacro:macro>
+
+
   <xacro:include filename="$(find mobile_dd_robot)/model/robot.gazebo"/>
 
   <link name="dummy"/>
@@ -140,5 +155,28 @@
     </collision>
     <xacro:inertia_caster/>
   </link>
+
+    <!-- LiDAR Sensor Joint -->
+    <joint name="laser_joint" type="fixed">
+        <parent link="body_link"/>
+        <child link="laser_frame"/>
+        <origin xyz="0.1 0 0.175" rpy="0 0 0"/>
+    </joint>
+
+    <!-- LiDAR Sensor Link -->
+    <link name="laser_frame">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.04"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.04"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="0.1" length="0.04" radius="0.05"/>
+    </link>
 
 </robot>

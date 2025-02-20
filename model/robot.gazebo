@@ -24,6 +24,36 @@
     <mu2>0.000002</mu2>
     <material>Gazebo/Blue</material>
   </gazebo>
+ 
+  <gazebo reference="laser_frame">
+    <material>Gazebo/Red</material>
+    <sensor name="laser" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.3</min>
+          <max>12</max>
+        </range>
+      </ray>
+      <plugin name="laser_controller" filename="libgazebo_ros_laser.so">
+        <ros>
+          <argument>~/out:=/scan</argument>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>laser_frame</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
 
   <gazebo>
     <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
