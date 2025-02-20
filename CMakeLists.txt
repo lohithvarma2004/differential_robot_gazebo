@@ -7,12 +7,24 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 install(
   DIRECTORY launch model
   DESTINATION share/${PROJECT_NAME}
+)
+add_executable(diff_drive_controller src/diff_drive_controller.cpp)
+ament_target_dependencies(diff_drive_controller rclcpp std_msgs geometry_msgs)
+
+install(TARGETS diff_drive_controller
+  DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS
+  src/waypoint_navigation.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

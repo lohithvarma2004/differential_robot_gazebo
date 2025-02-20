@@ -6,6 +6,11 @@
   <description>TODO: Package description</description>
   <maintainer email="lohithvarma2004@todo.todo">lohithvarma2004</maintainer>
   <license>TODO: License declaration</license>
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rclpy</depend>
+  <depend>nav_msgs</depend>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
