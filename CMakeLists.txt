@@ -11,6 +11,9 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED) 
+find_package(gazebo_ros REQUIRED)
+find_package(nav_msgs REQUIRED)
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -20,6 +23,13 @@ install(
 )
 add_executable(diff_drive_controller src/diff_drive_controller.cpp)
 ament_target_dependencies(diff_drive_controller rclcpp std_msgs geometry_msgs)
+# Add your new plugin source file
+add_library(rpm_diff_drive_plugin SHARED src/rpm_diff_drive_plugin.cpp)
+ament_target_dependencies(rpm_diff_drive_plugin rclcpp gazebo_ros std_msgs nav_msgs)
+
+# Install the plugin library to the 'lib' folder
+install(TARGETS rpm_diff_drive_plugin
+  LIBRARY DESTINATION lib)
 
 install(TARGETS diff_drive_controller
   DESTINATION lib/${PROJECT_NAME})

@@ -1,6 +1,8 @@
 #include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/twist.hpp>
 #include <std_msgs/msg/float64.hpp>
+#include <cmath>
+#include <algorithm>
 
 class DiffDriveController : public rclcpp::Node {
 public:

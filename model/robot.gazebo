@@ -55,26 +55,13 @@
   </gazebo>
 
 
-  <gazebo>
-    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
-      <ros>
-        <namespace></namespace>
-      </ros>
-      <num_wheel_pairs>1</num_wheel_pairs>
-      <!-- Wheels: note that left_joint and right_joint are assigned as intended -->
-      <left_joint>wheel2_joint</left_joint>
-      <right_joint>wheel1_joint</right_joint>
-      <!-- Using body_link_x_dim (defined in your main xacro file) instead of undefined body_link_dim -->
-      <wheel_separation>${body_link_x_dim + wheel_link_length}</wheel_separation>
-      <!-- Corrected spelling of wheel_diameter and set it to twice the wheel radius -->
-      <wheel_diameter>${2 * wheel_link_radius}</wheel_diameter>
-      <max_wheel_torque>1000</max_wheel_torque>
-      <max_wheel_acceleration>5.0</max_wheel_acceleration>
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <publish_wheel_tf>true</publish_wheel_tf>
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>dummy</robot_base_frame>
-    </plugin>
-  </gazebo>
+<gazebo>
+  <plugin name="rpm_diff_drive" filename="librpm_diff_drive_plugin.so">
+    <left_joint>wheel2_joint</left_joint>
+    <right_joint>wheel1_joint</right_joint>
+    <wheel_radius>0.1</wheel_radius>
+    <wheelbase>0.5</wheelbase>
+  </plugin>
+</gazebo>
+
 </robot>
